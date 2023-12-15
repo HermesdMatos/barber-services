@@ -47,6 +47,6 @@ export class ExpertsController {
       }
       }
     const expert = await this.expertsService.updateExpert(id, data);
-    return res.json(expert);
+    return res.status(HttpStatus.NO_CONTENT).json(expert);
   }
 }
