@@ -21,4 +21,10 @@ export class ExpertsController {
     const experts = await this.expertsService.findAllExperts();
     return res.status(HttpStatus.OK).json(experts);
   }
+
+  @Get(':id')
+  async getExpert(@Res() res: any, @Body('id') id: string) {
+    const experts = await this.expertsService.findOneExpert(id);
+    return res.status(HttpStatus.OK).json(experts);
+  }
 }
