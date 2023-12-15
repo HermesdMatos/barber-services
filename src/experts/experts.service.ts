@@ -28,4 +28,7 @@ export class ExpertsService {
       }
     });
   }
+  async updateExpert(id: string, data: CreateExpertsDto) {
+    await this.prisma.expert.update({where: {id}, data})
+  }
 }
