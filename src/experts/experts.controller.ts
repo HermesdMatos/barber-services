@@ -1,4 +1,4 @@
-import { BadRequestException, Body, Controller, HttpStatus, Post, Res } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Get, HttpStatus, Post, Res } from '@nestjs/common';
 import { ExpertsService } from './experts.service';
 import CreateExpertsDto from './dtos/create-experts';
 
@@ -14,5 +14,11 @@ export class ExpertsController {
     }
     const expert = await this.expertsService.createExpert(data);
     return res.status(HttpStatus.CREATED).json(expert);
+  }
+
+  @Get()
+  async getExperts(@Res() res: any) {
+    const experts = await this.expertsService.findAllExperts();
+    return res.status(HttpStatus.OK).json(experts);
   }
 }
