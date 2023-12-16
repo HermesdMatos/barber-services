@@ -12,7 +12,7 @@ export class ExpertsController {
     
     const expertExists = await this.expertsService.findExpertsbyEmail(data.email);
     if (expertExists) {
-      throw new BadRequestException('Email already exists');
+      throw new BadRequestException('Já existe um expert com este email');
     }
     const expert = await this.expertsService.createExpert(data);
     return res.status(HttpStatus.CREATED).json(expert);
@@ -28,7 +28,7 @@ export class ExpertsController {
   async getExpert(@Param('id') id: string, @Res() res: Response) {
     const experts = await this.expertsService.findOneExpert(id);
     if (!experts) {
-      throw new BadRequestException('Expert not found');
+      throw new BadRequestException('Não existe um expert com este id');
     }
     return res.json(experts);
   }
@@ -40,12 +40,12 @@ export class ExpertsController {
     
       const experts = await this.expertsService.findOneExpert(id);
       if (!experts.id) {
-        throw new BadRequestException('Expert not found');
+        throw new BadRequestException('Não existe um expert com este id');
       }
       if (data.email) {
         const expertExists = await this.expertsService.findExpertsbyEmail(data.email);
       if (expertExists && expertExists.email !== experts.email) {
-        throw new BadRequestException('Email already exists');
+        throw new BadRequestException('Já existe um expert com este email');
       }
       }
     const expert = await this.expertsService.updateExpert(id, data);
