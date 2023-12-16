@@ -1,13 +1,15 @@
-import { BadRequestException, Body, Controller, Get, HttpStatus, Param, Post, Put, Res } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Get, HttpStatus, Param, Patch, Post, Put, Res } from '@nestjs/common';
 import { ExpertsService } from './experts.service';
 import CreateExpertsDto from './dtos/create-experts';
+import { Response } from 'express';
 
 @Controller('experts')
 export class ExpertsController {
   constructor(private readonly expertsService: ExpertsService) { }
   
   @Post()
-  async create(@Body() data: CreateExpertsDto, @Res() res: any) {
+  async create(@Body() data: CreateExpertsDto, @Res() res: Response) {
+    
     const expertExists = await this.expertsService.findExpertsbyEmail(data.email);
     if (expertExists) {
       throw new BadRequestException('Email already exists');
@@ -17,13 +19,13 @@ export class ExpertsController {
   }
 
   @Get()
-  async getExperts(@Res() res: any) {
+  async getExperts(@Res() res: Response) {
     const experts = await this.expertsService.findAllExperts();
     return res.json(experts);
   }
 
   @Get(':id')
-  async getExpert(@Param('id') id: string, @Res() res: any) {
+  async getExpert(@Param('id') id: string, @Res() res: Response) {
     const experts = await this.expertsService.findOneExpert(id);
     if (!experts) {
       throw new BadRequestException('Expert not found');
@@ -31,10 +33,10 @@ export class ExpertsController {
     return res.json(experts);
   }
 
-  @Put(':id')
+  @Patch(':id')
   async updateExpert(@Param('id') id: string,
     @Body() data: CreateExpertsDto,
-    @Res() res: any) {
+    @Res() res: Response) {
     
       const experts = await this.expertsService.findOneExpert(id);
       if (!experts.id) {
