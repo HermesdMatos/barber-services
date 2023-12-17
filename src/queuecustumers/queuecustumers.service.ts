@@ -43,4 +43,11 @@ export class QueuecustumersService {
       }
     })
   }
+  async deleteCustomer(custumerID: number) {
+    await this.prisma.queueCustomer.delete({
+      where: {
+        id: custumerID
+      }
+    })
+  }
 }
