@@ -7,12 +7,12 @@ export class QueuesService {
   constructor(private readonly prisma: PrismaService) { }
 
   async createQueue(data: CreateQueueDto) {
-    return await this.prisma.queue.create({data})
+    return await this.prisma.queue.create({ data })
   }
   async queueExistsToDay(expertId: string) {
     return await this.prisma.queue.findFirst({
       where: {
-        createdAt: {equals: new Date()}, expertId
+        createdAt: { equals: new Date() }, expertId
       }
     })
   }
@@ -42,6 +42,11 @@ export class QueuesService {
         queueCustomer: true
       }
     })
-    return queuesToday
+    return queuesToday.map(queue => {
+      return {
+        ...queue,
+        queueCustomer: queue.queueCustomer.filter(custumer => custumer.isAwaitng)
+      }
+    })
   }
 }
