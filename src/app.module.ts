@@ -3,9 +3,12 @@ import { PrismaModule } from "./database/prisma.module";
 import { ExpertsModule } from './experts/experts.module';
 import { QueuesModule } from './queues/queues.module';
 import { QueuecustumersModule } from './queuecustumers/queuecustumers.module';
+import { UsersModule } from './users/users.module';
+import { AuthModule } from './auth/auth.module';
+// import { JwtModule } from './jwt/jwt.module';
 
 @Module({
-  imports: [PrismaModule, ExpertsModule, QueuesModule, QueuecustumersModule],
+  imports: [PrismaModule, ExpertsModule, QueuesModule, QueuecustumersModule, UsersModule, AuthModule],
   controllers: [],
   providers: []
 })

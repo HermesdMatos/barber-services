@@ -1,10 +1,10 @@
 import { IsEmail, IsNotEmpty } from 'class-validator';
 export default class CreateExpertsDto {
-  @IsNotEmpty({ message: 'Name is required' })
+  @IsNotEmpty({ message: 'O campo nome é obrigatório' })
   name: string;
 
-  @IsNotEmpty({ message: 'Email is required' })
-  @IsEmail({}, { message: 'Email is invalid' })
+  @IsNotEmpty({ message: 'O campo email é obrigatório' })
+  @IsEmail({}, { message: 'O email é inválido' })
   email: string;
 
   phone: string;
