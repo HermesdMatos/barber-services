@@ -13,11 +13,11 @@ import { AppController } from './auth.controller';
     UsersModule,
     PassportModule,
     JwtModule.register({
-      secret: process.env.JWT_SECRET,
-      signOptions: { expiresIn: process.env.JWT_EXPIRES_IN },
+      secret: process.env.JWT_SECRET || 'secret',
+      signOptions: { expiresIn: process.env.JWT_EXPIRES_IN || '1d' },
     }),
   ],
-  controllers: [AppController],
+  controllers: [AppController, ],
   providers: [AuthService, LocalStrategy, JwtStrategy, UsersService],
   exports: [AuthService]
 })

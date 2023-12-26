@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaClientUnknownRequestError } from '@prisma/client/runtime/library';
+// import { PrismaClientUnknownRequestError } from '@prisma/client/runtime/library';
 import { PrismaService } from 'src/database/prisma.service';
 import CreateExpertsDto from './dtos/create-experts';
 

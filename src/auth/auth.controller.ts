@@ -4,12 +4,12 @@ import { Request, Response } from 'express';
 import { AuthService } from './auth.service';
 import { JwtAuthGuard } from './jwt-auth.guard';
 
-@Controller()
+@Controller('login')
 export class AppController {
   constructor(private readonly authService: AuthService) { }
   
   @UseGuards(LocalAuthGuard)
-  @Post('auth/login')
+  @Post()
   async login(@Res() res: Response, @Req() req: Request) {
     const acess_token = await this.authService.login(req.user); 
     const users = {

@@ -16,6 +16,15 @@ export class AuthService {
     }
     return null;
   }
+  async validateId(id: string) {
+    const user = await this.usersService.findOne(id);
+    
+    if (user) {
+      const { password, ...result } = user;
+      return result;
+    }
+    return null;
+  }
 
   async login(user: any) {
     const payload = { name: user.name, email: user.email, id: user.id };
