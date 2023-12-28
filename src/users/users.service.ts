@@ -21,8 +21,8 @@ export class UsersService {
     return user
   }
 
-  async findUserByEmail(email: string) {
-    return await this.prisma.user.findFirst({
+  async findUserByEmail(email: string) {    
+    return await this.prisma.user.findUnique({
       where: {
         email,
       },
@@ -34,21 +34,11 @@ export class UsersService {
   }
 
   async findOne(id: string) {
-    return await this.prisma.user.findFirst({
-      where: {
-        id
-      }
-    })
-
-  }
+  return await this.prisma.user.findUniqueOrThrow({ where: { id } })
+}
 
   async update(id: string, data: UpdateUsersDto) {
-    return await this.prisma.user.update({
-      where: {
-        id
-      },
-      data
-    })
+    return await this.prisma.user.update({where: {id},data})
   }
 
   async delete(id: string) {
